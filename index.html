@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Build the beginning of your Ren’Dar character’s story in Ela’Tharn.">
+<title>My Character’s Story Begins in Ela’Tharn</title>
+<style>
+:root{color-scheme:light;--ink:#253b35;--green:#285b48;--line:#d5ddd2}*{box-sizing:border-box}body{margin:0;background:#f4f2e9;color:var(--ink);font:17px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1100px;margin:auto;padding:36px 22px 50px}header{max-width:800px;margin-bottom:30px}.eyebrow{text-transform:uppercase;font-size:12px;letter-spacing:.15em;font-weight:700;color:#5b6d56}h1{font:700 clamp(30px,5vw,46px)/1.15 Georgia,serif;margin:12px 0 18px}h2,legend{font:700 23px/1.3 Georgia,serif}p{margin:12px 0}.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:start}.card,fieldset{background:#fffef9;border:1px solid var(--line);border-radius:16px;padding:22px;margin:0 0 20px;min-width:0}legend{padding:0 8px}label.choice{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:8px;cursor:pointer;min-height:48px}label.choice:hover{background:#f0f4eb}input[type=checkbox]{width:22px;height:22px;flex-shrink:0;accent-color:var(--green);margin:2px 0 0}input[type=text],textarea{font:inherit;color:inherit;background:white;border:1px solid #8a9b90;border-radius:8px;padding:12px;width:100%;margin-top:7px}textarea{resize:vertical;min-height:90px}input:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid #ba790d;outline-offset:3px}.custom{display:block;margin-top:15px}.hint{font-size:14px;color:#58685e}button{font:700 16px system-ui;padding:13px 18px;border-radius:9px;border:1px solid var(--green);cursor:pointer;min-height:48px;background:var(--green);color:white}button.secondary{background:transparent;color:var(--green)}button:disabled{opacity:.5;cursor:default}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}#story{min-height:260px;line-height:1.7}#status{min-height:1.6em;font-size:14px}aside{position:sticky;top:20px}ol{padding-left:23px}footer{font:italic 20px/1.5 Georgia,serif;text-align:center;padding:22px} [hidden]{display:none!important}@media(max-width:800px){.layout{grid-template-columns:1fr}aside{position:static}main{padding:24px 16px}.card,fieldset{padding:17px}h1{max-width:650px}}
+</style>
+</head>
+<body><main>
+<header><div class="eyebrow">Ren’Dar · Session 1 · Moving Day Festival</div><h1>My Character’s Story Begins in Ela’Tharn</h1><p>You don’t need to know your character’s whole story yet!</p><p>Choose <strong>one or more answers for each question</strong>, or write your own. You can leave details undecided, change your answers, and add to your story as you play. These choices work for any species.</p></header>
+<div class="layout"><form id="builder" autocomplete="off">
+<div class="card"><label for="name"><strong>Character’s name</strong> <span class="hint">(if you’ve chosen one)</span></label><input id="name" type="text" placeholder="Enter your character’s name"></div>
+<div id="questions"></div>
+<div class="card"><label class="choice"><input type="checkbox" id="optional"><span>Include question 4 — something people might notice about my character <span class="hint">(optional)</span></span></label></div>
+<div id="fourth" hidden></div>
+</form>
+<aside><section class="card" aria-labelledby="preview-heading"><div class="eyebrow">Your story, taking shape</div><h2 id="preview-heading">My Character’s Starting Story</h2><p class="hint">Your choices appear here automatically. The story stays blank until you begin.</p><label class="hint" for="story">Story preview — select this text to copy manually if needed.</label><textarea id="story" readonly placeholder="Your story will appear here…"></textarea><div class="buttons"><button type="button" id="copy" disabled>Copy My Story</button><button type="button" class="secondary" id="reset">Start Over</button></div><p id="status" role="status" aria-live="polite"></p><p class="hint">Your answers stay on this page. They aren’t saved after you close or reload it. Copy your story before leaving.</p></section>
+<section class="card"><h2>Save your story in Roll20</h2><ol><li>Select <strong>Copy My Story</strong>.</li><li>Open your character sheet in Roll20.</li><li>Find the <strong>Notes</strong> tab.</li><li>Paste your story into the Notes section and save your changes.</li></ol><p class="hint">Return to your Notes during the campaign to add details about your character, friendships, and adventures.</p></section></aside></div>
+<footer>You don’t need to know your character’s whole story. You only need to know where it begins.</footer>
+<noscript><p>This activity needs JavaScript enabled to build your story. You can still write your answers directly in Roll20’s Notes tab.</p></noscript>
+</main>
+<script>
+'use strict';
+const questions=[
+{title:'1. Why am I in Ela’Tharn?',prompt:'Write another reason',options:[
+'I live here and am helping prepare for Moving Day.',
+'I’m visiting family or friends.',
+'I’ve come to enjoy the festival and its games.',
+'I’m travelling through and decided to stay for the celebrations.',
+'I’ve come to work, trade, or deliver something.',
+'I’m here to learn a skill or explore the valley.',
+'I’m looking for someone or something.']},
+{title:'2. Who do I know?',prompt:'Add your own connection',options:[
+'I know someone who lives in Ela’Tharn.',
+'I know someone from Nor’Tharn and hope to see them on Moving Day.',
+'I have family or a family friend in the valley.',
+'I travelled here with another member of the party.',
+'I’ve met another member of the party before.',
+'I don’t know anyone here yet.']},
+{title:'3. What do I hope to accomplish?',prompt:'Add another hope or goal',options:[
+'I hope to make friends and find somewhere I belong.',
+'I hope to win a competition or prove what I can do.',
+'I hope to learn something new.',
+'I hope to earn some money or find work.',
+'I hope to help someone or repay a kindness.',
+'I hope to find adventure and see more of the world.',
+'I’m still figuring out what I want.']},
+{title:'4. What might people notice about me?',prompt:'Add your own detail',options:[
+'I ask lots of questions.',
+'I’m quiet until I get to know people.',
+'I love competitions.',
+'I’m always hungry.',
+'I like helping others.',
+'I’m quick with a joke.',
+'I notice small details.',
+'I’m eager to try new things.']}
+];
+const form=document.getElementById('builder'),story=document.getElementById('story'),copy=document.getElementById('copy'),status=document.getElementById('status');
+function makeQuestion(q,i){const field=document.createElement('fieldset');const legend=document.createElement('legend');legend.textContent=q.title;field.appendChild(legend);q.options.forEach((text,j)=>{const label=document.createElement('label');label.className='choice';const check=document.createElement('input');check.type='checkbox';check.name='q'+i;check.value=text;check.id='q'+i+'-'+j;const span=document.createElement('span');span.textContent=text;label.append(check,span);field.appendChild(label)});const label=document.createElement('label');label.className='custom';label.textContent=q.prompt;const custom=document.createElement('textarea');custom.id='custom'+i;custom.rows=2;custom.placeholder='Or write your own…';label.appendChild(custom);field.appendChild(label);return field}
+questions.forEach((q,i)=>document.getElementById(i===3?'fourth':'questions').appendChild(makeQuestion(q,i)));
+function buildStory(){const parts=[];const name=document.getElementById('name').value.trim();if(name)parts.push('My name is '+name+'.');questions.forEach((q,i)=>{if(i===3&&!document.getElementById('optional').checked)return;const answers=Array.from(form.querySelectorAll('input[name="q'+i+'"]:checked')).map(el=>el.value);const custom=document.getElementById('custom'+i).value.trim();if(custom)answers.push(custom);if(answers.length)parts.push(answers.join(' '))});return parts.join('\n\n')}
+function update(){document.getElementById('fourth').hidden=!document.getElementById('optional').checked;story.value=buildStory();copy.disabled=!story.value;status.textContent=''}
+form.addEventListener('input',update);form.addEventListener('change',update);form.addEventListener('submit',e=>e.preventDefault());
+function selectStory(){story.focus();story.select();story.setSelectionRange(0,story.value.length)}
+copy.addEventListener('click',async()=>{try{if(!navigator.clipboard||!window.isSecureContext)throw new Error('Clipboard unavailable');await navigator.clipboard.writeText(story.value);status.textContent='Copied! Paste your story into Roll20’s Notes tab.'}catch(e){selectStory();status.textContent='Your story is selected. Choose Copy from your device’s text menu, or press Ctrl+C (Windows) or Command+C (Mac).'}});
+document.getElementById('reset').addEventListener('click',()=>{if(!window.confirm('Are you sure? This will clear all your choices and your character’s story.'))return;form.reset();update();status.textContent='All cleared. Your next story can begin.';document.getElementById('name').focus()});
+window.addEventListener('pageshow',()=>{form.reset();update()});update();
+</script></body></html>
